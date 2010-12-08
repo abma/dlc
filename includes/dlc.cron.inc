@@ -3,13 +3,13 @@
 function dlc_cron_run(){
 	$lastrun=intval(variable_get("dlc_last_run",0));
 	//FIXME: we could loose a few queries, if a download is started after this line at the same second
-	$result=db_query("SELECT fid,timestamp FROM {download_count} WHERE timestamp > %d", $lastrun);
+	$result=db_query("SELECT dcid,fid,timestamp FROM {download_count} WHERE dcid > %d", $lastrun);
 	$updates=array();
 	
 	//for each entry in the log, increment the stat-tables
 	while ($row = db_fetch_array($result)) {
-		if ($lastrun<$row['timestamp'])
-			$lastrun=$row['timestamp'];
+		if ($lastrun<$row['dcid'])
+			$lastrun=$row['dcid'];
 		$day=$row['timestamp'] - ($row['timestamp'] % 86400); //round to full day
 
 		//insert/update into daily table
