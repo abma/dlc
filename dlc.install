@@ -64,4 +64,5 @@ function dlc_install() {
 function dlc_uninstall() {
 	drupal_uninstall_schema('dlc');
 	db_query("DELETE FROM {variable} WHERE name LIKE 'dlc_%'");
+	variable_del("dlc_last_run");
 }

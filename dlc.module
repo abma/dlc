@@ -32,6 +32,6 @@ function dlc_perm() {
  */
 
 function dlc_cron() {
-  //do something
+	dlc_cron_run();
 }
 
