@@ -35,3 +35,15 @@ function dlc_cron() {
 	dlc_cron_run();
 }
 
+
+function dlc_menu(){
+	$items=array();
+	$items['dlc'] = array(
+		'title' => 'dlc', 
+		'description' => 'Listing of download counts.', 
+		'page callback' => 'dlc_display_daily', 
+	   'access arguments' => array('access content'), 
+		'type' => MENU_SUGGESTED_ITEM,
+  	);
+  	return $items;
+}
