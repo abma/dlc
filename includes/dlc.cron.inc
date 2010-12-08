@@ -2,7 +2,6 @@
 
 function dlc_cron_run(){
 	$lastrun=intval(variable_get("dlc_last_run",0));
-	//FIXME: we could loose a few queries, if a download is started after this line at the same second
 	$result=db_query("SELECT dcid,fid,timestamp FROM {download_count} WHERE dcid > %d", $lastrun);
 	$updates=array();
 	
@@ -13,7 +12,7 @@ function dlc_cron_run(){
 		$day=$row['timestamp'] - ($row['timestamp'] % 86400); //round to full day
 
 		//insert/update into daily table
-		$res=db_query("UPDATE {dlc_day} SET count=count+1 WHERE day=%d",$row['fid']);
+		$res=db_query("UPDATE {dlc_day} SET count=count+1 WHERE day=%d",$day);
 		if (db_affected_rows()<=0)
 			$res=db_query("INSERT  INTO {dlc_day} (count, day) VALUES (%d, %d)",1,$day);
 
