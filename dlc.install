@@ -35,7 +35,10 @@ function dlc_schema() {
     'fields' => array(
       'day' => array(
         'description' => 'Primary Key: Date of the Day',
-        'type' => 'datetime',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
       ),
       'count' => array(
         'description' => t('Total count of downloads at this day'),
