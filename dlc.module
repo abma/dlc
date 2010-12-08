@@ -1,0 +1,37 @@
+<?php
+// $Id: dlc.module,v 1.20.2.15 2010/08/02 01:13:19 worldfallz Exp $
+
+/**
+ * @file
+ * Tracks file downloads for files stored in the drupal files table using the private files setting or custom private filefield.
+ */
+
+require_once ( dirname(__FILE__) . '/includes/dlc.cron.inc');
+require_once ( dirname(__FILE__) . '/includes/dlc.output.inc');
+
+/**
+ * Implementation of hook_help().
+ */
+function dlc_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#dlc':
+    return '<p>'. t("displays and aggregates file downloads data for files stored in the drupal files table") .'</p>';
+  }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function dlc_perm() {
+  $perms = array('view all download counts', 'view own download counts');
+  return $perms;
+}
+
+/**
+ * Implementation of hook_cron().
+ */
+
+function dlc_cron() {
+  //do something
+}
+

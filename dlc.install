@@ -1,0 +1,67 @@
+<?php
+// $Id: dlc.install,v 1.6.2.6 jobjol Exp $
+
+/**
+ * @file
+ * Installation code for the dlc module.
+ */
+
+/**
+ * Implementation of hook_schema().
+ */
+function dlc_schema() {
+  $schema['dlc_file'] = array(
+    'description' => t('TODO'),
+    'fields' => array(
+      'fid' => array(
+        'description' => 'Primary Key: File ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'count' => array(
+        'description' => t('Total count of downloads for this file'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('fid'),
+  );
+
+  $schema['dlc_day'] = array(
+    'description' => t('TODO'),
+    'fields' => array(
+      'day' => array(
+        'description' => 'Primary Key: Date of the Day',
+        'type' => 'datetime',
+      ),
+      'count' => array(
+        'description' => t('Total count of downloads at this day'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('day'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function dlc_install() {
+	drupal_install_schema('dlc');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function dlc_uninstall() {
+	drupal_uninstall_schema('dlc');
+	db_query("DELETE FROM {variable} WHERE name LIKE 'dlc_%'");
+}
