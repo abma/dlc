@@ -41,11 +41,12 @@ function _dlc_display_daily($date, $days){
 			$arr[]=$row;
 	}
 	foreach($arr as $row){
-		echo "<table><tr>";
-		echo "<td>".strftime("%Y.%m.%d",$row['day'])."</td>";
-		echo	"<td>".create_bar(10, $row[count], $max )."</td>";
-		echo "</tr></table>";
+		$output.= "<table><tr>";
+		$output.= "<td>".strftime("%Y.%m.%d",$row['day'])."</td>";
+		$output.= "<td>".create_bar(10, $row[count], $max )."</td>";
+		$output.= "</tr></table>";
 	}
+	return $output;
 }
 
 /**
@@ -62,6 +63,7 @@ function dlc_display_daily(){
 	$date=1291420800;
 	$days=14;
 	$monts=24;
-	_dlc_display_daily($date, $days);
-	_dlc_display_monthly($date,24); 
+	$output.= _dlc_display_daily($date, $days);
+	$output.= _dlc_display_monthly($date,24);
+	return $output;
 }
