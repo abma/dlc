@@ -35,6 +35,15 @@ function dlc_cron() {
 	dlc_cron_run();
 }
 
+function dlc_testdata(){
+	$timestamp="1291400000";
+	for($i=0;$i<10000; $i++){
+		$timestamp= $timestamp + 86001;
+		db_query("INSERT INTO download_count (fid, nid, uid, vid, ip_address, referrer, mirror, timestamp) VALUES
+			($i, 0, 0, 0, \"1.1.1.1\", \"\",  0, $timestamp)"); 
+	}
+	return "";
+}
 
 function dlc_menu(){
 	$items=array();
@@ -45,5 +54,15 @@ function dlc_menu(){
 	   'access arguments' => array('access content'), 
 		'type' => MENU_SUGGESTED_ITEM,
   	);
+
+	$items['dlc/testdata'] = array(
+		'title' => 'dlc', 
+		'description' => 'Listing of download counts.', 
+		'page callback' => 'dlc_testdata', 
+	   'access arguments' => array('access content'), 
+		'type' => MENU_SUGGESTED_ITEM,
+  	);
+
+  	
   	return $items;
 }
