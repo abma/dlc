@@ -56,7 +56,7 @@ function _dlc_display_monthly($date, $months){
 /**
 	display daily stats
 */
-function dlc_display_daily(){
+function dlc_display(){
 	$date=1291420800;
 	$days=14;
 	$monts=24;
