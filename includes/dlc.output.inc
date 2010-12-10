@@ -44,7 +44,7 @@ function _dlc_display_daily($date, $days){
 	$output=_dlc_create_head("Downloads last $days days");
 	$date = $date - ($date % 86400);
 	$end = $date - $days * 86400;
-	$result = db_query("select * from {dlc_day} where day>=%d and day<=%d ORDER BY day DESC", $date, $end );
+	$result = db_query("select * from {dlc_day} where day<=%d and day>=%d ORDER BY day DESC", $date, $end );
 	$arr=array();
 	$max=0;
 	while ($row = db_fetch_array($result)) {
@@ -71,7 +71,7 @@ function _dlc_display_monthly($date, $months){
 	$output=_dlc_create_head("Downloads last $months months");
 	$montsec=2678400; //seconds a month has
 	$enddate=$date - ($montsec*$months);
-	$result=db_query("SELECT day, FROM_UNIXTIME(day,'%Y/%m') as month, sum(count) as sumcount FROM {dlc_day} WHERE day>%d and day<$enddate GROUP by month ORDER by month DESC",$date, $enddate);
+	$result=db_query("SELECT day, FROM_UNIXTIME(day,'%Y/%m') as month, sum(count) as sumcount FROM {dlc_day} WHERE day<=%d and day>=$enddate GROUP by month ORDER by month DESC",$date, $enddate);
 	$arr=array();
 	$max=0;
 	while ($row = db_fetch_array($result)) {
@@ -97,7 +97,7 @@ function _dlc_display_weekly($date, $weeks){
 	$output=_dlc_create_head("Downloads last $weeks weekls");
 	$weeksec=604800; //seconds a week has
 	$enddate=$date - ($weeksec*$weeks);
-	$result=db_query("SELECT day, FROM_UNIXTIME(day,'%Y/%u') as week, sum(count) as sumcount FROM {dlc_day} WHERE day>%d and day<%d GROUP by week ORDER by week DESC",$date, $enddate);
+	$result=db_query("SELECT day, FROM_UNIXTIME(day,'%Y/%u') as week, sum(count) as sumcount FROM {dlc_day} WHERE day<=%d and day>=%d GROUP by week ORDER by week DESC",$date, $enddate);
 	$arr=array();
 	$max=0;
 	while ($row = db_fetch_array($result)) {
