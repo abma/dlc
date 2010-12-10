@@ -38,8 +38,8 @@ function dlc_cron() {
 
 function dlc_testdata(){
 	$timestamp=time();
-	for($i=0;$i<10000; $i++){
-		$timestamp= $timestamp - 86001;
+	for($i=0;$i<500000; $i++){
+		$timestamp= $timestamp - 861;
 		db_query("INSERT INTO download_count (fid, nid, uid, vid, ip_address, referrer, mirror, timestamp) VALUES
 			(".intval($i/5).", 0, 0, 0, \"1.1.1.1\", \"\",  0, $timestamp)"); 
 	}
