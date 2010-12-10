@@ -41,7 +41,7 @@ function dlc_testdata(){
 	for($i=0;$i<10000; $i++){
 		$timestamp= $timestamp - 86001;
 		db_query("INSERT INTO download_count (fid, nid, uid, vid, ip_address, referrer, mirror, timestamp) VALUES
-			(".$i/5.", 0, 0, 0, \"1.1.1.1\", \"\",  0, $timestamp)"); 
+			(".intval($i/5).", 0, 0, 0, \"1.1.1.1\", \"\",  0, $timestamp)"); 
 	}
 	return "";
 }
