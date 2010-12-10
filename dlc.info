@@ -1,4 +1,3 @@
-; $Id: dlc.info,v 1.4 2010/12/08 17:22:56 jobjol Exp $
 name = Download Count advanced
 description = Advanced download statistics and aggregation
 core = 6.x

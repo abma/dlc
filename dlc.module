@@ -1,9 +1,10 @@
 <?php
-// $Id: dlc.module,v 1.20.2.15 2010/08/02 01:13:19 worldfallz Exp $
+/* This file is part of Springfiles (GPL v2 or later), see LICENSE.txt */
 
 /**
+ * @author abma <spam@abma.de>
  * @file
- * Tracks file downloads for files stored in the drupal files table using the private files setting or custom private filefield.
+ * module file for dlc drupal module, registers hooks
  */
 
 require_once ( dirname(__FILE__) . '/includes/dlc.cron.inc');
@@ -34,7 +35,9 @@ function dlc_perm() {
 function dlc_cron() {
 	dlc_cron_run();
 }
-
+/**
+ * Generates some testdata
+ */
 
 function dlc_testdata(){
 	$timestamp=time();
@@ -45,7 +48,9 @@ function dlc_testdata(){
 	}
 	return "";
 }
-
+/*
+ * registers the urls of this module
+ */
 
 function dlc_menu(){
 	$items=array();

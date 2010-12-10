@@ -1,7 +1,8 @@
 <?php
-// $Id: dlc.install,v 1.6.2.6 jobjol Exp $
+/* This file is part of Springfiles (GPL v2 or later), see LICENSE.txt */
 
 /**
+ * @author abma <spam@abma.de>
  * @file
  * Installation code for the dlc module.
  */

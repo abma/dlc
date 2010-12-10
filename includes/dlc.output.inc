@@ -1,11 +1,20 @@
 <?php
+/* This file is part of Springfiles (GPL v2 or later), see LICENSE.txt */
+
 /**
-	creates a progressbar
-	$width is % it is filled
-	$maxnumber is the max possible amout
-	$show_text is the text displayed
-	$table_width is the width of the table
-*/
+ * @author abma <spam@abma.de>
+ * @file
+ * used for all output of the dlc-module
+ */
+
+
+/**
+ *	creates a progressbar
+ *	@param $width is % it is filled
+ *	@param $maxnumber is the max possible amout
+ *	@param $show_text is the text displayed
+ *	@param $table_width is the width of the table
+ */
 function create_bar($width, $maxnumber, $show_text="",$table_width=800){
 	$bar = "";
 	
@@ -37,8 +46,10 @@ function _dlc_create_head($title){
 }
 
 /**
-	private function, displays an 2 week stat
-*/
+ *	displays an 2 week stat
+ *	@param $date the last date
+ *	@param $days how many days are shown
+ */
 function _dlc_display_daily($date, $days=14){
 	//normalize date
 	$output=_dlc_create_head("Downloads last $days days");
@@ -62,10 +73,10 @@ function _dlc_display_daily($date, $days=14){
 }
 
 /**
-	display monthly statistics
-	$date is the startdate
-	$months is count of months to display
-*/
+ *	display monthly statistics
+ *	@param $date is the startdate
+ *	@param $months is count of months to display
+ */
 function _dlc_display_monthly($date, $months=24){
 	$output=_dlc_create_head("Downloads last $months months");
 	$montsec=2678400; //seconds a month has
@@ -88,10 +99,10 @@ function _dlc_display_monthly($date, $months=24){
 }
 
 /**
-	display monthly statistics
-	$date is the startdate
-	$weeks is count of months to display
-*/
+ *	display monthly statistics
+ *	@param $date is the startdate
+ *	@param $weeks is count of months to display
+ */
 function _dlc_display_weekly($date, $weeks=52){
 	$output=_dlc_create_head("Downloads last $weeks weekls");
 	$weeksec=604800; //seconds a week has
@@ -114,8 +125,8 @@ function _dlc_display_weekly($date, $weeks=52){
 }
 
 /**
-	display daily stats
-*/
+ *	display daily stats
+ */
 function dlc_display(){
 	$date=time();
 	$output.= _dlc_display_daily($date);
@@ -123,3 +134,4 @@ function dlc_display(){
 	$output.= _dlc_display_monthly($date);
 	return $output;
 }
+
