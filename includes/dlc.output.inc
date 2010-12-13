@@ -54,7 +54,7 @@ function _dlc_display_daily($date, $days=14){
 	$output=_dlc_create_head("Downloads last $days days");
 	$date = $date - ($date % 86400);
 	$end = $date - $days * 86400;
-	$result = db_query("select * from {dlc_day} where day<=%d and day>=%d AND fid = %d ORDER BY day DESC", $date, $end );
+	$result = db_query("select * from {dlc_day} where day<=%d and day>=%d ORDER BY day DESC", $date, $end );
 	$arr=array();
 	$max=0;
 	while ($row = db_fetch_array($result)) {
