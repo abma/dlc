@@ -9,7 +9,7 @@
 
 require_once ( dirname(__FILE__) . '/includes/dlc.cron.inc');
 require_once ( dirname(__FILE__) . '/includes/dlc.output.inc');
-
+require_once ( dirname(__FILE__) . '/includes/dlc.file-output.inc');
 /**
  * Implementation of hook_help().
  */
@@ -55,7 +55,7 @@ function dlc_testdata(){
 function dlc_menu(){
 	$items=array();
 	$items['dlc'] = array(
-		'title' => 'dlc', 
+		'title' => 'Site download stats', 
 		'description' => 'Listing of download counts.', 
 		'page callback' => 'dlc_display', 
 	   'access arguments' => array('access content'), 

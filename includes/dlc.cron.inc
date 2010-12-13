@@ -21,17 +21,38 @@ function dlc_cron_run(){
 		if ($lastrun<$row['dcid'])
 			$lastrun=$row['dcid'];
 		$day=$row['timestamp'] - ($row['timestamp'] % 86400); //round to full day
-
+		$week= date('o', $row['timestamp']).date('W', $row['timestamp']); // set week to year.weeknumber
+		$month= date('Y', $row['timestamp']).date('n', $row['timestamp']); //set month to year.month
+		$year= date('Y', $row['timestamp']); //set year from timestamp
 		//insert/update into daily table
 		$res=db_query("UPDATE {dlc_day} SET count=count+1 WHERE day=%d",$day);
 		if (db_affected_rows()<=0)
-			$res=db_query("INSERT  INTO {dlc_day} (count, day) VALUES (%d, %d)",1,$day);
+			$res=db_query("INSERT  INTO {dlc_day} (count, day) VALUES (%d, %d)",array(1,$day));
 
 		//insert/update into file table
 		$res=db_query("UPDATE {dlc_file} SET count=count+1 WHERE fid=%s",$row['fid']);
 		if (db_affected_rows()<=0)
-			$res=db_query("INSERT  INTO {dlc_file} (count, fid) VALUES (%d, %d)",1,$row['fid']);
-
+			$res=db_query("INSERT  INTO {dlc_file} (count, fid) VALUES (%d, %d)",array(1,$row['fid']));
+		
+		//insert/update into file day table
+		$res=db_query("UPDATE {dlc_file_day} SET count=count+1 WHERE fid=%s AND day = %d",array($row['fid'], $day));
+		if (db_affected_rows()<=0)
+			$res=db_query("INSERT  INTO {dlc_file_day} (count, fid, day) VALUES (%d, %d, %d)",array(1,$row['fid'], $day));
+			
+		//insert/update into file week table
+		$res=db_query("UPDATE {dlc_file_week} SET count=count+1 WHERE fid=%s AND week = %d",array($row['fid'], $week));
+		if (db_affected_rows()<=0)
+			$res=db_query("INSERT  INTO {dlc_file_week} (count, fid, week) VALUES (%d, %d, %d)",array(1,$row['fid'], $week));
+			
+		//insert/update into file month table
+		$res=db_query("UPDATE {dlc_file_month} SET count=count+1 WHERE fid=%s AND month = %d",array($row['fid'], $month));
+		if (db_affected_rows()<=0)
+			$res=db_query("INSERT  INTO {dlc_file_month} (count, fid, month) VALUES (%d, %d, %d)",array(1,$row['fid'], $month));
+		
+		//insert/update into file year table
+		$res=db_query("UPDATE {dlc_file_year} SET count=count+1 WHERE fid=%s AND year = %d",array($row['fid'], $year));
+		if (db_affected_rows()<=0)
+			$res=db_query("INSERT  INTO {dlc_file_year} (count, fid, year) VALUES (%d, %d, %d)",array(1,$row['fid'], $year));
 	}
 
 	//set start point for next run

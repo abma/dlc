@@ -52,8 +52,117 @@ function dlc_schema() {
     'primary key' => array('day'),
   );
 
-  return $schema;
-}
+   $schema['dlc_file_day'] = array(
+    'description' => t('file download count by day'),
+    'fields' => array(
+      'fid' => array(
+        'description' => 'Primary Key: File ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'day' => array(
+        'description' => 'Primary Key: timestamp of the Day',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'count' => array(
+        'description' => t('Total count of downloads at this day'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('day', 'fid'),
+  );
+  $schema['dlc_file_week'] = array(
+    'description' => t('file download count by week'),
+    'fields' => array(
+      'fid' => array(
+        'description' => 'Primary Key: File ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'week' => array(
+        'description' => 'Primary Key: year.weeknumber',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'count' => array(
+        'description' => t('Total count of downloads at this week'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('week', 'fid'),
+  );
+ $schema['dlc_file_month'] = array(
+    'description' => t('file download count by month'),
+    'fields' => array(
+      'fid' => array(
+        'description' => 'Primary Key: File ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'month' => array(
+        'description' => 'Primary Key: year.monthnumber',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'count' => array(
+        'description' => t('Total count of downloads at this month'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('month', 'fid'),
+  );
+ $schema['dlc_file_year'] = array(
+    'description' => t('file download count by year'),
+    'fields' => array(
+      'fid' => array(
+        'description' => 'Primary Key: File ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'year' => array(
+        'description' => 'Primary Key: year',
+        'type' => 'int',
+	'size' => 'small',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'count' => array(
+        'description' => t('Total count of downloads at this year'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('year', 'fid'),
+  );
+ return $schema;
+ }
 
 /**
  * Implementation of hook_install().
