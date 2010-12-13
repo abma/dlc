@@ -15,7 +15,7 @@
  *	@param $show_text is the text displayed
  *	@param $table_width is the width of the table
  */
-function create_bar($width, $maxnumber, $show_text="",$table_width=800){
+function create_bar($width, $maxnumber, $show_text="",$table_width=670){
 	$bar = "";
 	if ($maxnumber)
 		$percent = ($width / $maxnumber);
